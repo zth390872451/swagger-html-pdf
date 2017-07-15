@@ -1,0 +1,1 @@
+本服务器只是资源服务器.[搭建教程](http://www.jianshu.com/writer#/notebooks/14138071/notes/14282401)
