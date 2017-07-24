@@ -12,11 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService,Serializable {
 
 	private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	@Autowired

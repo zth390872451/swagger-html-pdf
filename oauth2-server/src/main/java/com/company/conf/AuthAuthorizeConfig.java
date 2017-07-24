@@ -1,5 +1,6 @@
 package com.company.conf;
 
+import com.company.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,11 +10,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 
 @Configuration
-
+@EnableWebMvc
 public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
@@ -22,6 +24,8 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private TokenStore tokenStore;
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
 
 	/**
 	 * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
@@ -44,7 +48,7 @@ public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-		endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore);
+		endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore).userDetailsService(userDetailsService);
 	}
 
 	/**
